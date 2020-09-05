@@ -1,0 +1,11 @@
+{
+    "name": "anhgelus/php-public-class",
+    "description": "PHP Public Class by Anhgelus",
+    "authors": [
+        {
+            "name": "anhgelus",
+            "email": "contact@horrorseriesprod.org"
+        }
+    ],
+    "require": {}
+}
