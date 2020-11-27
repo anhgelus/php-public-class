@@ -46,7 +46,13 @@ class Rooter {
             return 'Accueil';
         } else {
             if (file_exists(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'elements' . (string)$uri)) {
-                return substr($uri, 1);
+                $lenght = strlen($uri) - 5;
+
+                $preTitle = substr($uri, 1, $lenght);
+                $firstLetter = strtoupper(substr($preTitle, 0, 1));
+                
+                $title = $firstLetter . substr($preTitle, 1);
+                return $title;
             } else {
                 return '404';
             }
