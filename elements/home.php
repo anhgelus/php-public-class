@@ -8,7 +8,7 @@ $idMax = 8; //page max
 
 if (array_key_exists("test", $_GET)) {
     $id = (int)$_GET['test'];
-    $selection = new Selection($idMax);
+    $selection = new Selector($idMax);
 
     if ($selection->getId() != $id) {
         $selection->setId($id);
