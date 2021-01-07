@@ -34,18 +34,27 @@ class Rooter {
                     require dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'elements/404.php';
                     return $content = ob_get_clean();
                 } else {
-                    $sizeUri = strlen((string)$uri);
 
-                    $uri_TEMP = ($uri - $sizeUri) + 1;
-  
-                    if (file_exists(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'elements' . substr((string)$uri, 0, $uri_TEMP))) {
+                    $uri_TEMP = $position;
+                    print $uri_TEMP;
+
+                    $uri_TEMP2 = substr((string)$uri, 0, $uri_TEMP);
+                    print ' ' . $uri_TEMP2;
+
+                    if (file_exists(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'elements' . $uri_TEMP)) {
                         ob_start();
-                        require dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'elements' . (string)$uri;
+                        require dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'elements' . $uri_TEMP;
                         return $content = ob_get_clean();
                     } else {
-                        ob_start();
-                        require dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'elements/404.php';
-                        return $content = ob_get_clean();
+                        if ($uri_TEMP === '/') {
+                            ob_start(); // init du transfère du fichier dans la variable $content
+                            require dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'elements' . '/home.php';
+                            return $content = ob_get_clean(); // transfère dans la variable
+                        } else {
+                            ob_start();
+                            require dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'elements/404.php';
+                            return $content = ob_get_clean();
+                        }
                     }
                 }
 
@@ -78,26 +87,30 @@ class Rooter {
         } else {
 
             if (file_exists(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'elements' . (string)$uri)) {
-                createTitle($uri);
+                return createTitle($uri);
             } else {
                 $position = strpos((string)$uri, "?");
 
                 if (!$position) {
                     return '404';
                 } else {
-                    $sizeUri = strlen((string)$uri);
 
-                    $uri_TEMP = ($uri - $sizeUri) + 1;
+                    $uri_TEMP = $position - 1;
 
-                    if (file_exists(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'elements' . substr((string)$uri, 0, $uri_TEMP))) {
-                        createTitle($uri);
+                    $uri_TEMP2 = substr((string)$uri, 0, $uri_TEMP);
+
+                    if (file_exists(dirname(dirname(__DIR__)) . DIRECTORY_SEPARATOR . 'elements' . $uri_TEMP2)) {
+                        return createTitle($uri_TEMP2);
                     } else {
-                        return '404';
+                        if ($uri_TEMP === '/') {
+                            return 'Accueil';
+                        } else {
+                            return '404';
+                        }
                     }
                 }
             }
 
         }
-
     }
 }
