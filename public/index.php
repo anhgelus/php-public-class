@@ -5,11 +5,10 @@ use App\Rooter\Rooter;
 
 $uri = (string)$_SERVER['REQUEST_URI'];
 
-$rooter = new Rooter();
-$content = $rooter->root($uri);
+$rooter = new Rooter($uri);
+$rooter->setSiteName('PHP Public Class');
+$content = $rooter->root();
 $pageTitle = $rooter->getPageTitle();
-//$header = $rooter->getHeader();
-
-//$rooter->login();
+$desc = $rooter->getPageDesc();
 
 require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'elements/html.php';
