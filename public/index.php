@@ -7,6 +7,11 @@ $uri = (string)$_SERVER['REQUEST_URI'];
 
 $rooter = new Rooter($uri);
 $rooter->setSiteName('PHP Public Class');
+
+$rooter->mapTitle('/', 'Home Page');
+$rooter->mapDesc('/', 'It\'s just the home page');
+$rooter->map('/', 'home.php'); //yeah, this is useless but it's just an exemple
+
 $content = $rooter->root();
 $pageTitle = $rooter->getPageTitle();
 $desc = $rooter->getPageDesc();
