@@ -23,7 +23,7 @@ class Rooter {
     }
 
     /**
-     * Root vers la bonne page
+     * Root to the right page
      * @return string La page
      */
     public function root(): string
@@ -57,9 +57,9 @@ class Rooter {
 
     }
     /**
-     * Récupère le titre de la page
+     * Get the page's title
      *
-     * @return string Titre de la page
+     * @return string Page's title
      */
     public function getPageTitle(): string
     {
@@ -89,9 +89,9 @@ class Rooter {
     }
 
     /**
-     * Récupère la description de la page
+     * Get the page's description
      *
-     * @return string Description de la page
+     * @return string Page's description
      */
     public function getPageDesc(): string
     {
@@ -108,7 +108,9 @@ class Rooter {
     }
 
     /**
-     * @param string $siteName Nom du site
+     * Set the website name
+     *
+     * @param string $siteName website Name
      */
     public function setSiteName(string $siteName): void
     {
@@ -116,8 +118,10 @@ class Rooter {
     }
 
     /**
+     * Remap to the right page
+     *
      * @param string $uri Uri (ex: '/', '/news', '/video?id=16a', etc)
-     * @param string $link Lien vers la page ('video.php', 'test/test2.php', etc)
+     * @param string $link New link to the page ('video.php', 'test/test2.php', etc)
      */
     public function map(string $uri, string $link):void
     {
@@ -125,8 +129,10 @@ class Rooter {
     }
 
     /**
+     * Modify the title of a specific page
+     *
      * @param string $uri Uri (ex: '/', '/news', '/video?id=16a', etc)
-     * @param string $title Titre de la page ('Home Page', 'Just Video', etc)
+     * @param string $title New page's title ('Home Page', 'Just Video', etc)
      */
     public function mapTitle(string $uri, string $title):void
     {
@@ -134,8 +140,10 @@ class Rooter {
     }
 
     /**
+     * Add page's description
+     *
      * @param string $uri Uri (ex: '/', '/news', '/video?id=16a', etc)
-     * @param string $desc Description de la page ("Video page, it's just that lmao", 'You can use the simple quote with \'it\s\' if you want')
+     * @param string $desc New page's description ("Video page, it's just that lmao", 'You can use the simple quote with \'it\s\' if you want')
      */
     public function mapDesc(string $uri, string $desc):void
     {
@@ -143,10 +151,10 @@ class Rooter {
     }
 
     /**
-     * Informe si le fichier portant ce nom existe
+     * Informs if the file with this name exists
      *
-     * @param  mixed $uri Uri (ex: '/', '/hey', etc)
-     * @return bool True = fichier existe ; False = n'existe pas
+     * @param string $uri Uri (ex: '/', '/hey', etc)
+     * @return bool true = file existe ; false = file doesn't existe
      */
     private function doesItExist(string $uri): bool
     {
@@ -166,10 +174,10 @@ class Rooter {
     }
 
     /**
-     * Transforme la fin du fichier
+     * Transform the end to add the name of the website
      *
-     * @param  mixed $base Base à transformer
-     * @return string Base transformée
+     * @param  mixed $base Base to be transformed
+     * @return string Base transformed
      */
     private function transformEnd(string $base): string
     {
@@ -177,10 +185,10 @@ class Rooter {
     }
 
     /**
-     * Détecte et renvoie le nom du fichier originel lors de l'utilisation de GET dans un formulaire
+     * Detects and returns the original file name when using GET in a form
      *
      * @param  mixed $uri Uri (ex: '/', '/hey?lul=yes', etc)
-     * @return string Nom du fichier ; False = fichier inexistant
+     * @return string File's name ; False = file doesn't exist
      */
     private function detectorGetForm(string $uri): string
     {
@@ -192,11 +200,11 @@ class Rooter {
     }
 
     /**
-     * Détecte s'il y a l'utilisation de GET dans le lien $uri
+     * Detects if there is use of GET in the $uri link
      *
-     * @param array $mapTitle Array défini par $this->mapTitle()
+     * @param array $mapTitle Array defined by $this->mapTitle()
      * @param string $uri Uri (ex: '/', '/news', '/video?id=16a', etc)
-     * @return bool true = utilise GET | false = n'utilise pas GET
+     * @return bool true = use GET | false = doesn't use GET
      */
     private function detectGetIntoMap(array $mapTitle, string $uri): bool
     {
